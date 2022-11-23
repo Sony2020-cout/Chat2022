@@ -1,0 +1,51 @@
+#include <iostream>
+#include <string>
+#include <map>
+#include <regex>
+
+
+std::map<std::string, std::string> questions_answers = {
+    {"Hello","Hello, pal\n"},
+    {"How (do you do| are you)" , "I'm functioning within normal parameters\n"},
+    {"Exit", "I do not wanna talk to you\n"},
+    {"What are you doing", "I'm cheeling, pal\n"},
+    {"No pain", "No gain. I know)\n"},
+    {"Keep gunpowder", "dry, as always)\n"},
+    {"(What is | Whats) (your )? name", "My name is girya)\n"},
+};
+
+
+void bot_reply(std::string user_text) {
+    //найти ответ перебором
+    for (auto element : questions_answers) {
+        std::regex phrase(".*" + element.first + ".*", std::regex_constants::icase);
+        if (regex_match(user_text, phrase)){
+            std::cout << "[bot]:" << element.second << std::endl;
+        }
+    }
+}
+
+
+
+int main()
+{
+    std::cout << "Welcome to my Chat\n";
+
+    std::string question;
+
+    while(question != "exit" || question != "Exit"){
+    std::cout << "[user]:";
+    getline(std::cin, question);
+
+    bot_reply(question);
+    }
+   /* if (question == "hello") {
+        std::cout << "Hello, pal\n";
+    }
+    if (question == "bye") {
+        std::cout << "Bye, pal\n";
+    }*/
+
+
+}
+
